@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Person</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: Person (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Person</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96,7%
+  </span>
+  <span class="absValue">
+    (29/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * Clase que representa a una persona con edad,nombre y genero
+&nbsp; *
+&nbsp; * @author Adrian Camacho Ferrezuelo
+&nbsp; */
+&nbsp;
+&nbsp;public class Person {
+&nbsp;
+&nbsp;    private final String name;
+&nbsp;    private final int age;
+&nbsp;    private final String gender; //Male, Female
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Crea una nueva instancia de la clase Person con un nombre, edad y género.
+&nbsp;     *
+&nbsp;     * @param n El nombre de la persona
+&nbsp;     * @param a La edad de la persona
+&nbsp;     * @param g El género de la persona (MALE o FEMALE)
+&nbsp;     */
+<b class="fc">&nbsp;    public Person (String n, int a, String g){</b>
+<b class="fc">&nbsp;        g.toUpperCase();</b>
+<b class="fc">&nbsp;        if (n==&quot;&quot;){</b>
+<b class="fc">&nbsp;            throw new RuntimeException(&quot;El nombre no puede ser una cadena vacia&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (a&lt;=0){</b>
+<b class="fc">&nbsp;            throw  new RuntimeException(&quot;La edad debe ser mayor que 0&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (g.compareToIgnoreCase(&quot;MALE&quot;)!=0 &amp;&amp; g.compareToIgnoreCase(&quot;FEMALE&quot;)!=0) {</b>
+<b class="fc">&nbsp;            throw  new RuntimeException(&quot;El genero solo puede ser MAlE o FEMALE&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        name = n;</b>
+<b class="fc">&nbsp;        age = a;</b>
+<b class="fc">&nbsp;        gender = g;</b>
+&nbsp;    }
+&nbsp;    /** Devuelve el nombre de la persona */
+&nbsp;    public String getName() {
+<b class="fc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Devuelve la edad de la persona */
+&nbsp;    public int getAge() {
+<b class="fc">&nbsp;        return age;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Devuelve el género de la persona (Male o Female) */
+&nbsp;    public String getGender() {
+<b class="fc">&nbsp;        return gender;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Este método calcula el promedio de edad por género en una lista de personas.
+&nbsp;     *
+&nbsp;     * @param lista Lista de personas a procesar
+&nbsp;     * @return Array con dos elementos, el promedio de edad de hombres y mujeres en la lista. Si no hay hombres o mujeres en la lista, el promedio será 0.
+&nbsp;     */
+&nbsp;    public static double [] averageAgePerGender(List&lt;Person&gt; lista){
+<b class="fc">&nbsp;        double numeroHombres = 0,numeroMujeres = 0,sumaEdadHombres = 0,sumaEdadMujeres = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        if(lista== null){</b>
+<b class="nc">&nbsp;            throw  new RuntimeException(&quot;Lista no valida&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(lista.size()==0){</b>
+<b class="fc">&nbsp;            throw new RuntimeException(&quot;La lista esta vacia&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Person persoaActual : lista) {</b>
+<b class="fc">&nbsp;            if(persoaActual.gender.equalsIgnoreCase(&quot;MALE&quot;)){</b>
+<b class="fc">&nbsp;                numeroHombres++;</b>
+<b class="fc">&nbsp;                sumaEdadHombres += persoaActual.getAge();</b>
+&nbsp;            } else{
+<b class="fc">&nbsp;                numeroMujeres++;</b>
+<b class="fc">&nbsp;                sumaEdadMujeres += persoaActual.getAge();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        double edadMediaHombres = numeroHombres == 0 ? 0 : sumaEdadHombres/numeroHombres;</b>
+<b class="fc">&nbsp;        double edadMediaMujeres = numeroMujeres == 0 ? 0 : sumaEdadMujeres/numeroMujeres;</b>
+&nbsp;
+<b class="fc">&nbsp;        double resultado[] = {edadMediaHombres, edadMediaMujeres};</b>
+<b class="fc">&nbsp;        return resultado;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-15 18:27</div>
+</div>
+</body>
+</html>
